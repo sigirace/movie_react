@@ -11,9 +11,19 @@
         // 첫번째 인자는 HTML 태그와 같은 이름이어야 함
         // 두번째 인자는 속성값들
         // 세번째 인자는 content
-        const span = React.createElement("span", {id:"sexy-span", style:{color:"red"}}, "Hello I`m a span");
+        const h3 = React.createElement("h3", {
+            id:"title",
+            // React에서 event listener를 적용하는 방법
+            // javascript의 event listener에 on을 붙이고 camel 표기법을 적용
+            onMouseEnter: () => console.log("Mouse enter") 
+        }, "Hello I`m a span");
+        const btn = React.createElement("button", {
+            onClick: () => console.log("I`m clicked")
+        }, "Click me");
+        // div의 content에는 Element들의 순서를 정할 수 있음
+        const container = React.createElement("div", null, [h3, btn]);
         // render의 의미는 React element를 가지고 HTML로 만들어 배치한다는 의미
         // 즉, 사용자에게 보여준다는 것
-        ReactDOM.render(span, root)
+        ReactDOM.render(container, root)
     </script>
 </html>
