@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"> //react-dom은 react element를 html에 두는 역할 수행</script>
+    <script>
+        const root = document.getElementById("root")
+        // React
+        // 첫번째 인자는 HTML 태그와 같은 이름이어야 함
+        // 두번째 인자는 속성값들
+        // 세번째 인자는 content
+        const span = React.createElement("span", {id:"sexy-span", style:{color:"red"}}, "Hello I`m a span");
+        // render의 의미는 React element를 가지고 HTML로 만들어 배치한다는 의미
+        // 즉, 사용자에게 보여준다는 것
+        ReactDOM.render(span, root)
+    </script>
+</html>
