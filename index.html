@@ -9,21 +9,25 @@
   <script type="text/babel">
     const root = document.getElementById("root");
     function App() {
-      const [counter, setCounter] = React.useState(0);
-      const countUp = () => {
-        setCounter((current) => current + 1);
-        /*
-        1) 직접 할당 :setState(state +1)
-        2)함수를 할당:setState(state => state +1) (함수의 첫번째 인자는 현재 state 이다)
+      const [minutes, setMinutes] = React.useState();
 
-        현재 state랑 관련이 없는 값을 새로운 state로 하고싶은 경우에는 (1),
-        현재 state에 조금의 변화를 주어서 새로운 state를 주고 싶은 경우에는 (2)
-        */
+      const chgMin = () => {
+        setMinutes(event.target.value);
       };
       return (
         <div>
-          <h3>Total click:{counter}</h3>
-          <button onClick={countUp}>Click me</button>
+          <h1 className="hi">Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={minutes}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={chgMin}
+          />
+          <h4>You want convert {minutes}</h4>
+          <label htmlFor="hours">Hours</label>
+          <input id="hours" placeholder="Hours" type="number" />
         </div>
       );
     }
