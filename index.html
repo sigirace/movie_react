@@ -6,44 +6,45 @@
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
     /*
       1. 내용
 
-          props에는 function도 전달 할 수 있음
-          단, props에 넣는다고 해서 return에 전달되지 않음
-          따라서 컴포넌트 안에 재정의 해줘야함
-          
-          react memo를 통해 props가 변하지 않으면 re-rendering되지 않게 할 수 있음
+          협업시에 props에 잘못된 값을 보낼 수 있음
+          prop-types script를 가져와서 props에 타입을 지정함
 
-          부모에서 변경이 있어 모든 컴포넌트를 다시 그려야 한다면 부하 발생함
+          버전이슈로 두가지를 추가해줘야함
+          - https://unpkg.com/react@17.0.2/umd/react.development.js
+          - https://unpkg.com/prop-types@15.7.2/prop-types.js
       
       2. 복습
-      
-          state의 데이터(첫번째 인자)가 변경되는 함수(두번째 인자)를 불러올 때마다 rerendering 수행
+
     */
-    function Btn({text, onClick}){
-      console.log(text, "was re-render")
+    function Btn({text, fontSize=100}){
       return <button 
-        onClick={onClick}
         style={{
           backgroundColor: "tomato",
           color:"white",
           padding: "10px 20px",
           border: 0,
           borderRadius: 10,
+          fontSize: fontSize
         }}>{text}</button>
     }
-    
-    const MemorizedBtn = React.memo(Btn)
+
+    Btn.propTypes = {
+      text: PropTypes.string,
+      fontSize: PropTypes.number,
+    }
 
     function App() {
-      const [value, setValue] = React.useState("Save Changes");
-      const changeValue = () => setValue("Revert Changes");
+      
       return (
         <div>
-          <MemorizedBtn text={value} onClick={changeValue}/>
-          <MemorizedBtn text="Continue"/>
+          <Btn text="Save Btn" fontSize={18}/>
+          <Btn text={"Confirm"} />
         </div>
       );
     }
